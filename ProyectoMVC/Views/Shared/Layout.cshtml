@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Layout</title>
+    @using System.Web.Optimization
+    @Styles.Render("~/Content/bootstrapCSS")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="jumbotron">
+            Proyecto MVC5
+        </h1>
+
+        @RenderBody()  @*Encargado de cargar las vistas*@
+
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrapJS")
+
+</body>
+</html>
