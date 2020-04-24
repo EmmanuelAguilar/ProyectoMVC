@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Models;
 using System.Web.Mvc;
 
 namespace ProyectoMVC.Controllers
@@ -10,16 +7,44 @@ namespace ProyectoMVC.Controllers
     {
         //Un controlador esta compuesto por acciones y se navega por los controladores desde la URL
 
-        // GET: Home
-        //localhost/home
+        Alumno oAlumno = new Alumno();
+
         public ActionResult Index()
         {
-            return View();
+            return View(Alumno.Listar()); //Se le pasa a la vista el modelo, en la vista se tendra que especificar el modelo a utilizar
         }
 
-        public ActionResult Alumno()
+        public ActionResult Ver(int id)
         {
-            return View();
+            return View(oAlumno.Obtener(id));
+        }
+
+        public ActionResult Crud(int id = 0) //Insertar o actualizar un nuevo registro de alumnos
+        {
+            return View(
+                id == 0 ? new Alumno()              //nuevo alumno
+                        : oAlumno.Obtener(id)       //Update
+                );
+        }
+
+        public ActionResult Guardar(Alumno model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Guardar();
+                return Redirect("~/Home");
+            }else
+            {
+                return View("~/Views/Home/Crud.cshtml", model);
+            }
+            
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            oAlumno.id = id;
+            oAlumno.Eliminar();
+            return Redirect("~/Home");
         }
     }
 }

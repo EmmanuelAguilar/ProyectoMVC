@@ -1,4 +1,42 @@
-﻿
+﻿@*Se especifica el modelo a utilizar*@
+@model List<Models.Alumno> 
+@{
+    ViewBag.Title = "Inicio";
+ }
+
 <h2 class="page-header">
-    Index
+    Alumnos
 </h2>
+
+@using (Html.BeginForm("Crud", "Home", FormMethod.Post, new { id = "frm-nuevo-alumno" }))
+{
+    <div class="text-right">
+        <button type="submit" class="btn btn-xs btn-primary">Agregar</button>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th style="width:200px;">Sexo</th>
+            <th style="width:200px;">Fecha de nacimiento</th>
+            <th style="width:200px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@(m.Nombre + " " + m.Apellido)</td>
+                <td>@(m.Sexo == 1 ? "Hombre" : "Mujer")</td>
+                <td>@m.FechaNacimiento</td>
+                <td>
+                    <a class="btn btn-xs btn-default" href="~/home/Ver/@m.id">Visualizar</a>
+                    <a class="btn btn-xs btn-primary" href="~/home/Crud/@m.id">Editar</a>
+                    <a onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-xs btn-danger" href="~/home/Eliminar/@m.id">Eliminar</a>
+                </td>
+            </tr>
+            }
+    </tbody>
+</table>

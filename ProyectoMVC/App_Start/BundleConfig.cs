@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ProyectoMVC.App_Start
 {
@@ -21,6 +17,10 @@ namespace ProyectoMVC.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapJS").Include(
                       "~/assets/js/bootstrap.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/validate").Include(
+                      "~/assets/js/jquery.validate.min.js",
+                      "~/assets/js/jquery.validate.unobtrusive.min.js"));
         }
     }
 }
